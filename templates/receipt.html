@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parking Receipt</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 font-sans text-gray-800 min-h-screen flex items-center justify-center p-4">
+
+    <div class="bg-white p-6 rounded-xl shadow-md border border-gray-200 w-full max-w-sm">
+        <div class="text-center border-b pb-4 mb-4">
+            <span class="text-2xl"></span>
+            <h2 class="text-lg font-bold text-gray-900 tracking-wide mt-1">PARKING RECEIPT</h2>
+            <p class="text-xs text-gray-400 font-mono">Xtreme Parking Lot Ltd.</p>
+        </div>
+
+        <div class="space-y-2 text-sm text-gray-600 font-mono">
+            <div class="flex justify-between"><span class="text-gray-400">Driver:</span> <span
+                    class="font-bold text-gray-800">{{ receipt.driver_name }}</span></div>
+            <div class="flex justify-between"><span class="text-gray-400">Vehicle:</span> <span>{{ receipt.vehicle_model
+                    }}</span></div>
+            <div class="flex justify-between"><span class="text-gray-400">Plate:</span> <span class="font-bold">{{
+                    receipt.license_plate }}</span></div>
+            <div class="flex justify-between"><span class="text-gray-400">Freed Slot:</span> <span
+                    class="text-indigo-600 font-bold">Slot #{{ receipt.slot_id }}</span></div>
+
+            <hr class="my-3 border-dashed border-gray-300">
+
+            <div class="flex justify-between text-xs"><span class="text-gray-400">Start Time:</span> <span
+                    class="font-semibold text-gray-700">{{ receipt.entry_time }}</span></div>
+            <div class="flex justify-between text-xs"><span class="text-gray-400">End Time:</span> <span
+                    class="font-semibold text-gray-700">{{ receipt.exit_time }}</span></div>
+            <div class="flex justify-between text-xs"><span class="text-gray-400">Duration:</span> <span
+                    class="font-semibold text-gray-800">{{ receipt.duration }}</span></div>
+        </div>
+
+        <div class="mt-6 pt-4 border-t-2 border-dashed border-gray-300 flex justify-between items-center">
+            <span class="text-xs font-bold text-gray-500 uppercase">Total Amount</span>
+            <span class="text-2xl font-black text-indigo-600">Ksh. {{ "%.0f"|format(receipt.fee) }}</span>
+        </div>
+
+        <div class="mt-6 text-center">
+            <a href="/"
+                class="inline-block bg-slate-900 hover:bg-slate-800 text-white text-xs font-medium px-4 py-2 rounded-lg transition duration-200">
+                Return to Dashboard
+            </a>
+        </div>
+    </div>
+
+</body>
+
+</html>

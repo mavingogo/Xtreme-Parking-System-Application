@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xtreme Parking Lot</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 font-sans text-gray-800 min-h-screen">
+
+    <!-- Navbar -->
+    <nav class="bg-slate-900 text-white shadow-lg py-4 px-8 flex justify-between items-center">
+        <h1 class="text-xl font-bold tracking-wide flex items-center gap-2">
+            Xtreme Parking Management
+        </h1>
+        <a href="/register"
+            class="bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold px-4 py-2 rounded-lg transition duration-200">
+            + Park New Vehicle
+        </a>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="max-w-6xl mx-auto mt-8 px-4 grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+        <!-- Left Section: Parking Slots Grid -->
+        <div class="lg:col-span-2 bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+            <h2 class="text-lg font-bold text-gray-900 mb-4 flex items-center justify-between">
+                <span>Parking Space Status</span>
+                <span class="text-xs font-normal text-gray-500">(10 Total Slots)</span>
+            </h2>
+
+            <div class="grid grid-cols-2 sm:grid-cols-5 gap-3">
+                {% for slot in slots %}
+                <div
+                    class="p-3 rounded-lg border text-center transition flex flex-col justify-between h-28 
+                        {% if slot[1] %} bg-red-50 border-red-200 text-red-800 {% else %} bg-emerald-50 border-emerald-200 text-emerald-800 {% endif %}">
+                    <span class="text-xs font-bold uppercase tracking-wider">Slot {{ slot[0] }}</span>
+                    {% if slot[1] %}
+                    <div class="my-auto">
+                        <p class="text-xs font-semibold truncate">{{ slot[2] }}</p>
+                        <p class="text-[10px] text-red-600 font-mono mt-0.5">{{ slot[3] }}</p>
+                    </div>
+                    <span class="text-[10px] bg-red-200 text-red-800 rounded py-0.5 px-1 font-medium">Occupied</span>
+                    {% else %}
+                    <div class="my-auto">
+                        <span class="text-2xl">🟢</span>
+                    </div>
+                    <span
+                        class="text-[10px] bg-emerald-200 text-emerald-800 rounded py-0.5 px-1 font-medium">Available</span>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Right Section: Checkout Form -->
+        <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200 h-fit">
+            <h2 class="text-lg font-bold text-gray-900 mb-2">Vehicle Sign Out</h2>
+            <p class="text-xs text-gray-500 mb-4">Enter driver's license plate to calculate duration and generate
+                receipt.</p>
+
+            <form action="/checkout" method="POST" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold uppercase text-gray-600 mb-1">License Plate</label>
+                    <input type="text" name="license_plate" required placeholder="e.g. KJT 453T"
+                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm">
+                </div>
+                <button type="submit"
+                    class="w-full bg-slate-900 hover:bg-slate-800 text-white font-medium py-2.5 rounded-lg text-sm transition duration-200">
+                    Sign Out & Calculate Bill
+                </button>
+            </form>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
